@@ -14,5 +14,6 @@ namespace FarmaciasUwU.App.Models
         public string Descripcion { get; set; }
         public float Precio { get; set; }
         public byte[] Imagen { get; set; }
+        public int Cantidad { get; set; }
     }
 }

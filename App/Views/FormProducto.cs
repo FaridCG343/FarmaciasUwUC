@@ -35,6 +35,7 @@ namespace FarmaciasUwU.App.Views
                 tbShowNombre.Text = productos[index].Nombre;
                 tbShowDes.Text = productos[index].Descripcion;
                 tbShowPrecio.Text = productos[index].Precio.ToString();
+                tbShowCantidad.Text = productos[index].Cantidad.ToString();
                 using MemoryStream ms = new MemoryStream(productos[index].Imagen);
                 pbShowImg.Image = Image.FromStream(ms);
             }
@@ -45,6 +46,7 @@ namespace FarmaciasUwU.App.Views
                 tbShowDes.Text = string.Empty;
                 tbShowPrecio.Text = string.Empty;
                 pbShowImg.Image = null;
+                tbShowCantidad.Text = string.Empty;
             }
         }
 
@@ -122,14 +124,15 @@ namespace FarmaciasUwU.App.Views
             {
                 return;
             }
-            if (pbShowImg.Image == null || tbShowDes.Text == "" || tbShowNombre.Text == "" || tbShowPrecio.Text == "")
+            if (pbShowImg.Image == null || tbShowDes.Text == "" || tbShowNombre.Text == "" || tbShowPrecio.Text == "" || tbShowCantidad.Text == "" )
             {
                 MessageBox.Show("Debes de rellenar todos los campos", "Atencion");
                 return;
             }
+            int cant = int.Parse(tbShowCantidad.Text);
             using MemoryStream ms = new();
             pbShowImg.Image.Save(ms, pbShowImg.Image.RawFormat);
-            ProductoController.Update(productos[index].Id, tbShowNombre.Text, tbShowDes.Text, float.Parse(tbShowPrecio.Text), ms.ToArray());
+            ProductoController.Update(productos[index].Id, tbShowNombre.Text, tbShowDes.Text, float.Parse(tbShowPrecio.Text), ms.ToArray(), cant);
             Filter();
         }
 
@@ -143,14 +146,15 @@ namespace FarmaciasUwU.App.Views
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (pbAgregarImg.Image == null || tbAgregarDescripcion.Text == "" || tbAgregarNombre.Text == "" || tbAgregarPrecio.Text == "")
+            if (pbAgregarImg.Image == null || tbAgregarDescripcion.Text == "" || tbAgregarNombre.Text == "" || tbAgregarPrecio.Text == "" || tbAddCantidad.Text == "")
             {
                 MessageBox.Show("Debes de rellenar todos los campos", "Atencion");
                 return;
             }
+            int cant = int.Parse(tbAddCantidad.Text);
             using MemoryStream ms = new();
             pbAgregarImg.Image.Save(ms, pbAgregarImg.Image.RawFormat);
-            ProductoController.Create(tbAgregarNombre.Text, tbAgregarDescripcion.Text, float.Parse(tbAgregarPrecio.Text), ms.ToArray());
+            ProductoController.Create(tbAgregarNombre.Text, tbAgregarDescripcion.Text, float.Parse(tbAgregarPrecio.Text), ms.ToArray(), cant);
             pbAgregarImg.Image = null;
             tbAgregarDescripcion.Text = string.Empty;
             tbAgregarNombre.Text = string.Empty;

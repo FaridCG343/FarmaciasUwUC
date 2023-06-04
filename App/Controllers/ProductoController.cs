@@ -15,7 +15,7 @@ namespace FarmaciasUwU.App.Controllers
             return db.Productos.ToList();
         }
 
-        public static Producto Create(string nombre, string descripcion, float precio, byte[] imagen)
+        public static Producto Create(string nombre, string descripcion, float precio, byte[] imagen, int cantidad = 0)
         {
             Connection db = new();
             Producto producto = new()
@@ -23,7 +23,8 @@ namespace FarmaciasUwU.App.Controllers
                 Nombre = nombre,
                 Descripcion = descripcion,
                 Precio = precio,
-                Imagen = imagen
+                Imagen = imagen,
+                Cantidad = cantidad
             };
             db.Productos.Add(producto);
             db.SaveChanges();
@@ -37,7 +38,7 @@ namespace FarmaciasUwU.App.Controllers
             return producto;
         }
 
-        public static Producto? Update(int id, string? nombre, string? descripcion, float? precio, byte[]? imagen)
+        public static Producto? Update(int id, string? nombre, string? descripcion, float? precio, byte[]? imagen, int? cantidad)
         {
             Connection db = new();
             Producto? producto = db.Productos.Find(id);
@@ -49,6 +50,25 @@ namespace FarmaciasUwU.App.Controllers
             producto.Descripcion = string.IsNullOrEmpty(descripcion) ? producto.Descripcion : descripcion;
             producto.Precio = precio ?? producto.Precio;
             producto.Imagen = imagen ?? producto.Imagen;
+            producto.Cantidad = cantidad ?? producto.Cantidad;
+            db.Productos.Update(producto);
+            db.SaveChanges();
+            return producto;
+        }
+
+        public static Producto? Update(int id, int cant)
+        {
+            Connection db = new();
+            Producto? producto = db.Productos.Find(id);
+            if (producto == null)
+            {
+                return null;
+            }
+            if (cant > producto.Cantidad)
+            {
+                throw new ArgumentException($"La cantidad no puede ser mayor a la disponible para el producto \"{producto.Nombre}\"");
+            }
+            producto.Cantidad -= cant;
             db.Productos.Update(producto);
             db.SaveChanges();
             return producto;

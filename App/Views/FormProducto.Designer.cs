@@ -58,6 +58,10 @@
             tbBDescripcion = new TextBox();
             tbBPrecioMax = new TextBox();
             fileDialog = new OpenFileDialog();
+            lblCantidad = new Label();
+            tbShowCantidad = new TextBox();
+            tbAddCantidad = new TextBox();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataProductos).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbShowImg).BeginInit();
@@ -70,7 +74,7 @@
             btnRegresar.Location = new Point(767, 374);
             btnRegresar.Name = "btnRegresar";
             btnRegresar.Size = new Size(75, 23);
-            btnRegresar.TabIndex = 16;
+            btnRegresar.TabIndex = 19;
             btnRegresar.Text = "Regresar";
             btnRegresar.UseVisualStyleBackColor = true;
             btnRegresar.Click += btnRegresar_Click;
@@ -81,7 +85,7 @@
             tbBPrecioMin.Name = "tbBPrecioMin";
             tbBPrecioMin.PlaceholderText = "PrecioMin";
             tbBPrecioMin.Size = new Size(119, 23);
-            tbBPrecioMin.TabIndex = 15;
+            tbBPrecioMin.TabIndex = 17;
             tbBPrecioMin.TextChanged += tbBNombre_TextChanged;
             // 
             // tbBNombre
@@ -90,7 +94,7 @@
             tbBNombre.Name = "tbBNombre";
             tbBNombre.PlaceholderText = "Nombre";
             tbBNombre.Size = new Size(150, 23);
-            tbBNombre.TabIndex = 14;
+            tbBNombre.TabIndex = 15;
             tbBNombre.TextChanged += tbBNombre_TextChanged;
             // 
             // dataProductos
@@ -108,6 +112,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(tbShowCantidad);
+            groupBox1.Controls.Add(lblCantidad);
             groupBox1.Controls.Add(pbShowImg);
             groupBox1.Controls.Add(tbShowPrecio);
             groupBox1.Controls.Add(label2);
@@ -123,7 +129,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(28, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(387, 295);
+            groupBox1.Size = new Size(387, 327);
             groupBox1.TabIndex = 11;
             groupBox1.TabStop = false;
             groupBox1.Text = "Productos";
@@ -145,7 +151,7 @@
             tbShowPrecio.Name = "tbShowPrecio";
             tbShowPrecio.PlaceholderText = "Precio";
             tbShowPrecio.Size = new Size(100, 23);
-            tbShowPrecio.TabIndex = 11;
+            tbShowPrecio.TabIndex = 3;
             tbShowPrecio.TextChanged += tbPrecio_TextChanged;
             // 
             // label2
@@ -154,7 +160,7 @@
             label2.Location = new Point(18, 193);
             label2.Name = "label2";
             label2.Size = new Size(40, 15);
-            label2.TabIndex = 10;
+            label2.TabIndex = 0;
             label2.Text = "Precio";
             // 
             // btnGuardar
@@ -162,14 +168,14 @@
             btnGuardar.Location = new Point(293, 193);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(75, 23);
-            btnGuardar.TabIndex = 8;
+            btnGuardar.TabIndex = 5;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnUltimo
             // 
-            btnUltimo.Location = new Point(265, 246);
+            btnUltimo.Location = new Point(265, 282);
             btnUltimo.Name = "btnUltimo";
             btnUltimo.Size = new Size(50, 25);
             btnUltimo.TabIndex = 9;
@@ -179,7 +185,7 @@
             // 
             // btnSiguiente
             // 
-            btnSiguiente.Location = new Point(209, 246);
+            btnSiguiente.Location = new Point(209, 282);
             btnSiguiente.Name = "btnSiguiente";
             btnSiguiente.Size = new Size(50, 25);
             btnSiguiente.TabIndex = 8;
@@ -189,7 +195,7 @@
             // 
             // btnAnterior
             // 
-            btnAnterior.Location = new Point(113, 246);
+            btnAnterior.Location = new Point(113, 282);
             btnAnterior.Name = "btnAnterior";
             btnAnterior.Size = new Size(50, 25);
             btnAnterior.TabIndex = 7;
@@ -199,7 +205,7 @@
             // 
             // btnPrimero
             // 
-            btnPrimero.Location = new Point(57, 246);
+            btnPrimero.Location = new Point(57, 282);
             btnPrimero.Name = "btnPrimero";
             btnPrimero.Size = new Size(50, 25);
             btnPrimero.TabIndex = 6;
@@ -214,7 +220,7 @@
             tbShowDes.Name = "tbShowDes";
             tbShowDes.PlaceholderText = "Descripcion";
             tbShowDes.Size = new Size(243, 54);
-            tbShowDes.TabIndex = 4;
+            tbShowDes.TabIndex = 2;
             // 
             // tbShowNombre
             // 
@@ -222,7 +228,7 @@
             tbShowNombre.Name = "tbShowNombre";
             tbShowNombre.PlaceholderText = "Nombre";
             tbShowNombre.Size = new Size(100, 23);
-            tbShowNombre.TabIndex = 3;
+            tbShowNombre.TabIndex = 1;
             // 
             // lblShowNumUsuario
             // 
@@ -230,7 +236,7 @@
             lblShowNumUsuario.Location = new Point(18, 37);
             lblShowNumUsuario.Name = "lblShowNumUsuario";
             lblShowNumUsuario.Size = new Size(66, 15);
-            lblShowNumUsuario.TabIndex = 2;
+            lblShowNumUsuario.TabIndex = 0;
             lblShowNumUsuario.Text = "#Producto:";
             // 
             // lblDescripcion
@@ -239,7 +245,7 @@
             lblDescripcion.Location = new Point(18, 124);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(69, 15);
-            lblDescripcion.TabIndex = 1;
+            lblDescripcion.TabIndex = 0;
             lblDescripcion.Text = "Descripcion";
             // 
             // label1
@@ -253,6 +259,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(tbAddCantidad);
+            groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(pbAgregarImg);
             groupBox2.Controls.Add(tbAgregarPrecio);
             groupBox2.Controls.Add(label3);
@@ -263,7 +271,7 @@
             groupBox2.Controls.Add(label6);
             groupBox2.Location = new Point(474, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(387, 295);
+            groupBox2.Size = new Size(387, 327);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
             groupBox2.Text = "Agregar productos";
@@ -285,7 +293,7 @@
             tbAgregarPrecio.Name = "tbAgregarPrecio";
             tbAgregarPrecio.PlaceholderText = "Precio";
             tbAgregarPrecio.Size = new Size(100, 23);
-            tbAgregarPrecio.TabIndex = 11;
+            tbAgregarPrecio.TabIndex = 12;
             tbAgregarPrecio.TextChanged += tbPrecio_TextChanged;
             // 
             // label3
@@ -294,7 +302,7 @@
             label3.Location = new Point(18, 193);
             label3.Name = "label3";
             label3.Size = new Size(40, 15);
-            label3.TabIndex = 10;
+            label3.TabIndex = 0;
             label3.Text = "Precio";
             // 
             // btnAgregar
@@ -302,7 +310,7 @@
             btnAgregar.Location = new Point(293, 193);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(75, 23);
-            btnAgregar.TabIndex = 8;
+            btnAgregar.TabIndex = 14;
             btnAgregar.Text = "Guardar";
             btnAgregar.UseVisualStyleBackColor = true;
             btnAgregar.Click += btnAgregar_Click;
@@ -314,7 +322,7 @@
             tbAgregarDescripcion.Name = "tbAgregarDescripcion";
             tbAgregarDescripcion.PlaceholderText = "Descripcion";
             tbAgregarDescripcion.Size = new Size(243, 54);
-            tbAgregarDescripcion.TabIndex = 4;
+            tbAgregarDescripcion.TabIndex = 11;
             // 
             // tbAgregarNombre
             // 
@@ -322,7 +330,7 @@
             tbAgregarNombre.Name = "tbAgregarNombre";
             tbAgregarNombre.PlaceholderText = "Nombre";
             tbAgregarNombre.Size = new Size(100, 23);
-            tbAgregarNombre.TabIndex = 3;
+            tbAgregarNombre.TabIndex = 10;
             // 
             // label5
             // 
@@ -330,7 +338,7 @@
             label5.Location = new Point(18, 124);
             label5.Name = "label5";
             label5.Size = new Size(69, 15);
-            label5.TabIndex = 1;
+            label5.TabIndex = 0;
             label5.Text = "Descripcion";
             // 
             // label6
@@ -348,7 +356,7 @@
             tbBDescripcion.Name = "tbBDescripcion";
             tbBDescripcion.PlaceholderText = "Descripcion";
             tbBDescripcion.Size = new Size(271, 23);
-            tbBDescripcion.TabIndex = 17;
+            tbBDescripcion.TabIndex = 16;
             tbBDescripcion.TextChanged += tbBNombre_TextChanged;
             // 
             // tbBPrecioMax
@@ -364,6 +372,42 @@
             // 
             fileDialog.FileName = "openFileDialog1";
             fileDialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;";
+            // 
+            // lblCantidad
+            // 
+            lblCantidad.AutoSize = true;
+            lblCantidad.Location = new Point(20, 246);
+            lblCantidad.Name = "lblCantidad";
+            lblCantidad.Size = new Size(55, 15);
+            lblCantidad.TabIndex = 0;
+            lblCantidad.Text = "Cantidad";
+            // 
+            // tbShowCantidad
+            // 
+            tbShowCantidad.Location = new Point(125, 243);
+            tbShowCantidad.Name = "tbShowCantidad";
+            tbShowCantidad.PlaceholderText = "Cantidad";
+            tbShowCantidad.Size = new Size(100, 23);
+            tbShowCantidad.TabIndex = 4;
+            tbShowCantidad.TextChanged += tbPrecio_TextChanged;
+            // 
+            // tbAddCantidad
+            // 
+            tbAddCantidad.Location = new Point(125, 238);
+            tbAddCantidad.Name = "tbAddCantidad";
+            tbAddCantidad.PlaceholderText = "Cantidad";
+            tbAddCantidad.Size = new Size(100, 23);
+            tbAddCantidad.TabIndex = 13;
+            tbAddCantidad.TextChanged += tbPrecio_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(20, 241);
+            label4.Name = "label4";
+            label4.Size = new Size(55, 15);
+            label4.TabIndex = 0;
+            label4.Text = "Cantidad";
             // 
             // FormProducto
             // 
@@ -425,5 +469,9 @@
         private TextBox tbBDescripcion;
         private TextBox tbBPrecioMax;
         private OpenFileDialog fileDialog;
+        private TextBox tbShowCantidad;
+        private Label lblCantidad;
+        private TextBox tbAddCantidad;
+        private Label label4;
     }
 }

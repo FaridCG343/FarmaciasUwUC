@@ -52,6 +52,7 @@
             btnPagar = new Button();
             btnAgregar = new Button();
             tbPago = new TextBox();
+            lblProductCant = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
@@ -84,6 +85,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Pink;
+            panel2.Controls.Add(lblProductCant);
             panel2.Controls.Add(btnSeleccionar);
             panel2.Controls.Add(button1);
             panel2.Controls.Add(button2);
@@ -306,6 +308,16 @@
             tbPago.TabIndex = 7;
             tbPago.TextChanged += tbPago_TextChanged;
             // 
+            // lblProductCant
+            // 
+            lblProductCant.AutoSize = true;
+            lblProductCant.Font = new Font("Consolas", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblProductCant.Location = new Point(232, 313);
+            lblProductCant.Name = "lblProductCant";
+            lblProductCant.Size = new Size(80, 18);
+            lblProductCant.TabIndex = 16;
+            lblProductCant.Text = "Cantidad:";
+            // 
             // FormPOS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -362,5 +374,6 @@
         private Button btnAnterior;
         private Button btnPrimero;
         private TextBox tbPago;
+        private Label lblProductCant;
     }
 }

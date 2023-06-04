@@ -60,6 +60,7 @@ namespace FarmaciasUwU.Views
                     contadorEspecial = e.KeyData == Keys.B ? 8 : 0;
                     if (contadorEspecial == 8)
                     {
+                        contadorEspecial = 0;
                         MessageBox.Show("Has activado el modo de administrador");
                         Program.adminForm ??= new();
                         Program.adminForm.Show();
@@ -80,7 +81,8 @@ namespace FarmaciasUwU.Views
                 lblProductId.Text = $"#Producto: {productos[index].Id}";
                 lblProductName.Text = "Nombre: " + productos[index].Nombre;
                 lblProductDes.Text = "Descripcion: " + productos[index].Descripcion;
-                lblProductPrice.Text = "Precio: " + productos[index].Precio.ToString();
+                lblProductPrice.Text = "Precio: " + productos[index].Precio;
+                lblProductCant.Text = $"Cantidad: {productos[index].Cantidad}";
                 using MemoryStream ms = new(productos[index].Imagen);
                 pbProductImage.Image = Image.FromStream(ms);
             }
@@ -90,6 +92,7 @@ namespace FarmaciasUwU.Views
                 lblProductName.Text = "Nombre: ";
                 lblProductDes.Text = "Descripcion: ";
                 lblProductPrice.Text = "Precio: ";
+                lblProductCant.Text = "Cantidad: ";
                 pbProductImage.Image = null;
             }
         }
@@ -103,8 +106,8 @@ namespace FarmaciasUwU.Views
         {
             string patron = @"\d+\.?\d*";
             Regex regex = new(patron);
-            TextBox tb = (TextBox)sender;
-            tb.Text = regex.Match(tb.Text).Value;
+            tbBPrecioMax.Text = regex.Match(tbBPrecioMax.Text).Value;
+            tbBPrecioMin.Text = regex.Match (tbBPrecioMin.Text).Value;
             Filter();
         }
         private void btnPrimero_Click(object sender, EventArgs e)
@@ -221,7 +224,16 @@ namespace FarmaciasUwU.Views
                 MessageBox.Show("El pago no puede ser menor al total");
                 return;
             }
-            List<object> result = TicketController.Create(Program.user.Id, total, carrito);
+            List<object> result;
+            try
+            {
+                result = TicketController.Create(Program.user.Id, total, carrito);
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show($"{ae.Message}");
+                return;
+            }
             Ticket ticket = (Ticket)result[0];
             List<TicketDetails> details = (List<TicketDetails>)result[1];
             string ticketInfo = $"#Ticket: {ticket.Id} \n" +
@@ -244,7 +256,7 @@ namespace FarmaciasUwU.Views
         private void tbPago_TextChanged(object sender, EventArgs e)
         {
             string patron = @"\d+\.?\d*";
-            Regex regex = new(patron); 
+            Regex regex = new(patron);
             TextBox tb = (TextBox)sender;
             tb.Text = regex.Match(tb.Text).Value;
         }
@@ -263,6 +275,7 @@ namespace FarmaciasUwU.Views
             carritoSource.DataSource = carrito.Values.ToArray();
             total = 0;
             lblTotal.Text = $"Total: {total}";
+            tbPago.Text = string.Empty ;
         }
     }
 }
